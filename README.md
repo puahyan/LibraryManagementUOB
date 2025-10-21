@@ -3,6 +3,10 @@
 
 Under LibraryManagementUOB\LibraryManagementSystem\LibraryManagementSystem
 
+Open with Visual Studio , Right click on "LibraryManagementSystem", clean and rebuild
+
+Make sure Sql Management Installed, use master schema
+
 dotnet ef migrations add SetupDatabase
 
 dotnet ef database update
