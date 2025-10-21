@@ -1,5 +1,5 @@
 # LibraryManagementUOB
-1. Command
+1. Command (Databse = master)
 Under LibraryManagementUOB\LibraryManagementSystem\LibraryManagementSystem
 
 dotnet ef migrations add SetupDatabase
@@ -9,9 +9,8 @@ dotnet ef migrations add SeedData
 dotnet ef database update
 
 2. Scaffolding command if any changes in databases
-3. 
-LibraryManagementSystem\LibraryManagementSystem 
 
+Under LibraryManagementSystem\LibraryManagementSystem 
 
 dotnet ef dbcontext scaffold "Server=localhost;Database=master;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer --output-dir Entity --context LibraryContext --use-database-names --force
 
