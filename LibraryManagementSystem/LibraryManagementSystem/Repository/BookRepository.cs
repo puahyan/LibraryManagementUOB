@@ -40,7 +40,8 @@ namespace LibraryManagementSystem.Repository
                 Author = bookModel.Author,
                 PublishedYear = int.TryParse(bookModel.PublishedYear, out var year) ? year : 0,
                 Genre = bookModel.Genre,
-                RackId = bookModel.RackId
+                RackId = bookModel.RackId,
+                RentPeriod = bookModel.RentPeriod,
             };
 
             _context.Books.Add(bookEntity);
