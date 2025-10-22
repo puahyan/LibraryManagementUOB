@@ -43,3 +43,13 @@ For example : user1 , password : password123
 
 
 6. Then you may browse certain API depending on user roles.
+
+7. Dynatrace
+
+<img width="1838" height="789" alt="image" src="https://github.com/user-attachments/assets/cda9dcdb-9744-4de4-b7c1-e6728d1bc978" />
+
+
+At the end of the json content, please included :
+ "SecretKey": "5HjZzOG2LGDe1FNK6wkptaRbNKknhrJ8",
+ "DynatraceId": "mro66917",
+ "DynatraceToken": "dt0c01.4EZ6GDAIYOHVO7OWB24FOPS3.PNH7XG2LTOHAKJXBWNXEAH7JONL3TF2E2JBU5XRZOSRV5CTGUX3B3RRPP4TIRQ7W"
