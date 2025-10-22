@@ -41,7 +41,7 @@ namespace LibraryManagementSystem.Repository
             if (bookModel.Type == "Rent")
             {
                 var rentBook = await _context.StudentBooks
-                    .FirstOrDefaultAsync(b => b.BookId == bookModel.BookId);
+                    .FirstOrDefaultAsync(b => b.BookId == bookModel.BookId && b.ReturnedDate == null);
 
                 if (rentBook != null)
                 {
@@ -61,7 +61,7 @@ namespace LibraryManagementSystem.Repository
 
                     return "Book Has been Rented Out";
                 }
-            } 
+            }
             else if (bookModel.Type == "Return")
             {
                 var rentedBook = await _context.StudentBooks

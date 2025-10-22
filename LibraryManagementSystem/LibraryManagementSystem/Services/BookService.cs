@@ -7,13 +7,14 @@ namespace LibraryManagementSystem.Services
     public class BookService : IBookService
     {
         private readonly IBookRepository _bookRepository;
-
-        public BookService(IBookRepository bookRepository)
+        private readonly IDynatraceLoggerService _logger;
+        public BookService(IBookRepository bookRepository, IDynatraceLoggerService logger)
         {
             _bookRepository = bookRepository;
+            _logger = logger;
         }
 
-        public async Task<IEnumerable<BookDto>>GetAllBooksAsync()
+        public async Task<IEnumerable<BookDto>> GetAllBooksAsync()
         {
             var bookDtos = new List<BookDto>();
 
@@ -39,7 +40,7 @@ namespace LibraryManagementSystem.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                await _logger.LogAsync("GetAllBooksAsync ", ex.Message);
             }
 
             return bookDtos;
@@ -69,7 +70,7 @@ namespace LibraryManagementSystem.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                await _logger.LogAsync("GetBookByTitleAsync ", ex.Message);
             }
             return bookDto;
         }
@@ -80,12 +81,13 @@ namespace LibraryManagementSystem.Services
             {
                 await _bookRepository.AddBookAsync(book);
             }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
+            catch (Exception ex)
+            {
+                await _logger.LogAsync("AddBookAsync ", ex.Message);
             }
         }
 
-        public async Task UpdateBookAsync(BookModel book) 
+        public async Task UpdateBookAsync(BookModel book)
         {
             try
             {
@@ -93,11 +95,11 @@ namespace LibraryManagementSystem.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                await _logger.LogAsync(" UpdateBookAsync ", ex.Message);
             }
         }
 
-        public async Task DeleteBookAsync(int id) 
+        public async Task DeleteBookAsync(int id)
         {
             try
             {
@@ -105,8 +107,8 @@ namespace LibraryManagementSystem.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                await _logger.LogAsync(" DeleteBookAsync ", ex.Message);
             }
-        }  
+        }
     }
 }

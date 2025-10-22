@@ -7,10 +7,11 @@ namespace LibraryManagementSystem.Services
     public class RentService : IRentService
     {
         private readonly IRentRepository _rentRepository;
-
-        public RentService(IRentRepository rentRepository)
+        private readonly IDynatraceLoggerService _logger;
+        public RentService(IRentRepository rentRepository, IDynatraceLoggerService logger)
         {
             _rentRepository = rentRepository;
+            _logger = logger;
         }
 
         public async Task<IEnumerable<RentBookDto>> GetAllRentedBooksAsync()
@@ -36,12 +37,12 @@ namespace LibraryManagementSystem.Services
                         ReturnedDate = b.ReturnedDate,
                     })
                     .ToList();
-
+                await _logger.LogAsync("GetAllRentedBooksAsync ", bookDtos);
                 return bookDtos;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                await _logger.LogAsync("GetAllRentedBooksAsync ", ex.Message);
             }
 
             return bookDtos;
@@ -74,7 +75,7 @@ namespace LibraryManagementSystem.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                await _logger.LogAsync("GetStudentBookByIdAsync ", ex.Message);
             }
 
             return bookDtos;
@@ -87,12 +88,13 @@ namespace LibraryManagementSystem.Services
             {
                 resultMessage = await _rentRepository.AddRentBookAsync(book);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
             }
 
             resultMessage = "Invalid Operation";
-
+            await _logger.LogAsync("AddRentBookAsync ", resultMessage);
             return resultMessage;
         }
     }
